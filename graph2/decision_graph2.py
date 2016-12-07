@@ -37,8 +37,11 @@ class DecisionGraph2(object):
         make an empty node
         :return: an empty node, which is not append to the self.nodes
         """
-        newAddress = self.numOfNodes + 1
-        self.nodes[where]['deps'].update({rel:[newAddress]})
+        newAddress = self.numOfNodes
+        if rel in self.nodes[where]['deps'].keys():
+            self.nodes[where]['deps'][rel].append(newAddress)
+        else:
+            self.nodes[where]['deps'].update({rel:[newAddress]})
         self.nodes[where]['gtype'] = wtype
         if wtype != 'simple':
             newNode = {'address': newAddress,
@@ -49,6 +52,7 @@ class DecisionGraph2(object):
                          'rel': rel,
                         }
             self.nodes[newAddress].update(newNode)
+            self.numOfNodes += 1
             return newAddress
         return None
 
@@ -110,6 +114,7 @@ class DecisionGraph2(object):
                     if has_sub_graph(g0, g1):
                         numOfCGraphs += 1
                         components = split_by_subgraph(g0, g1)
+                        assert len(components) > 1
                         newAddress=self.add_node_to(address,wtype='complex',g=g1,gtype='new',rel='SUBG')
                         for componentGraph in components:
                             self.add_node_to(newAddress,wtype='cgraph',g=componentGraph, gtype='new',rel='COMG')

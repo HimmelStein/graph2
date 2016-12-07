@@ -10,6 +10,8 @@ snt = "0 只有 _ _ c _ 2 ADV _ _ _ * 1 不断 _ _ d _ 2 ADV _ _ _ * 2 练习 _ 
 pat = "0 只有 _ _ c _ 20 ADV _ _ _ * 20 练习 _ _ v _ -1 HED _ _ _ * 40 才 _ _ c _ 60 ADV _ _ _ * 60 说 _ _ v _ 20 COO _ _ _"
 
 
+from pprint import pprint
+
 class TestGraphSplit(unittest.TestCase):
     """Basic test cases."""
 
@@ -40,8 +42,8 @@ class TestGraphSplit(unittest.TestCase):
         patterns = [pat]
         dg = graph2.DecisionGraph2(g=g0)
         rlt = dg.expand_by_decomposition(patterns)
-        print(rlt)
-        assert rlt > 0
+        pprint(dg.nodes)
+        assert rlt == 1
 
 
 if __name__ == '__main__':
