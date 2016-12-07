@@ -1,6 +1,3 @@
-
-
-
 # -*- coding: utf-8 -*-
 
 from .context import graph2
@@ -31,19 +28,23 @@ class TestGraph2Graph(unittest.TestCase):
         global chCNLL10, deCNLL10
         g0 = graph2.cnll10_to_networkx(chCNLL10)
         scoredMappings = graph2.scoring_mappings(g0,g0)
-        ref = OrderedDict([(12, {0: 0, 1: 1, 2: 2, 3: 3, 4: 4, -1: -1}), (8, {0: 2, 1: 1, 2: 0, 3: 3, 4: 4, -1: -1})])
+        ref = [OrderedDict([(12, {0: 0, 1: 1, 2: 2, 3: 3, 4: 4, -1: -1}), (8, {0: 2, 1: 1, 2: 0, 3: 3, 4: 4, -1: -1})]),
+               OrderedDict([(14, {0: 0, 1: 1, 2: 2, 3: 3, 4: 4, 5: 5, -1: -1}),
+                            (10, {0: 5, 1: 1, 2: 2, 3: 3, 4: 4, 5: 0, -1: -1}),
+                            (8, {0: 2, 1: 1, 2: 5, 3: 3, 4: 4, 5: 0, -1: -1})])
+               ]
         print(scoredMappings)
-        assert scoredMappings == ref
+        assert scoredMappings in ref
 
     def test_best__mapping(self):
         global chCNLL10, deCNLL10
         g0 = graph2.cnll10_to_networkx(chCNLL10)
         bestMapping = graph2.best_mapping(g0,g0)
-        ref ={0: 0, 1: 1, 2: 2, 3: 3, 4: 4, -1: -1}
+        ref =[{0: 0, 1: 1, 2: 2, 3: 3, 4: 4, -1: -1},
+              {0: 0, 1: 1, 2: 2, 3: 3, 4: 4, 5: 5, -1: -1}
+              ]
         print(bestMapping)
-        assert bestMapping == ref
-
-
+        assert bestMapping in ref
 
 
 if __name__ == '__main__':
