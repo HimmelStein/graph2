@@ -6,6 +6,13 @@ def has_sub_graph(g0,g1):
     gm = DiGraphMatcher(g0, g1)
     return gm.subgraph_is_isomorphic()
 
+def get_all_graph_patterns(type='cgraph'):
+    """
+    get all graph patterns of type
+    :param type:
+    :return: a list of nx graphs
+    """
+    pass
 
 def all_mappings(g0, g1):
     gm = DiGraphMatcher(g0, g1)

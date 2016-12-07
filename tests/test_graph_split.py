@@ -35,6 +35,14 @@ class TestGraphSplit(unittest.TestCase):
         rlt = graph2.split_by_subgraph(g0, g1)
         assert len(rlt) == 2
 
+    def test_graph_expand(self):
+        g0 = graph2.cnll10_to_networkx(snt)
+        patterns = [pat]
+        dg = graph2.DecisionGraph2(g=g0)
+        rlt = dg.expand_by_decomposition(patterns)
+        print(rlt)
+        assert rlt > 0
+
 
 if __name__ == '__main__':
     unittest.main()
